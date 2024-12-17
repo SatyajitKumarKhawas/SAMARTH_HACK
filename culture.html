@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Knowledge Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+        #chat-box div {
+            margin-bottom: 10px;
+        }
+        #chat-box div strong {
+            display: block;
+            font-weight: bold;
+        }
+        .chat-controls {
+            display: flex;
+            gap: 10px;
+        }
+        #chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #chat-send {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #chat-send:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cultural Knowledge Chatbot</h1>
+        <p>Ask questions about cultures and traditions around the world!</p>
+        <div id="chat-box"></div>
+        <div class="chat-controls">
+            <input type="text" id="chat-input" placeholder="Type your question here...">
+            <button id="chat-send">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+
+        const API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"; // Choose a model better suited for Q&A
+        const API_KEY = "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"; // Replace with your Hugging Face API Key
+
+        chatSend.addEventListener('click', async () => {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+
+            // Display user message
+            chatBox.innerHTML += `<div><strong>You:</strong> ${userInput}</div>`;
+            chatInput.value = '';
+
+            // Display bot typing message
+            chatBox.innerHTML += `<div><strong>Bot:</strong> Typing...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Define contextual prompt
+            const prompt = `You are an expert on cultural knowledge and traditions from around the world. Answer the following question: "${userInput}"`;
+
+            // Call Hugging Face API
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    inputs: prompt,
+                    options: { wait_for_model: true }
+                })
+            });
+
+            const result = await response.json();
+
+            // Parse response
+            const botResponse = result && result.generated_text ? result.generated_text : "I'm not sure how to respond to that.";
+            const botMessageElement = chatBox.querySelector("div:last-child");
+            botMessageElement.innerHTML = `<strong>Bot:</strong> ${botResponse}`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+</body>
+</html>

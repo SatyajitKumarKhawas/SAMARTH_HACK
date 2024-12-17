@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Planning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar Styles */
+    header {
+      background-color: #0066cc;
+      padding: 1rem 2rem;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .dark-mode-toggle {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      background-color: #005bb5;
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero button {
+      background-color: #ff9900;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .hero button:hover {
+      background-color: #e68a00;
+    }
+
+    /* Card Sections */
+    .card-section {
+      padding: 2rem;
+      text-align: center;
+      background-color: #fff;
+      margin: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background-color: #f1f1f1;
+      padding: 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      background-color: #e6e6e6;
+      transform: scale(1.05);
+    }
+
+    .card p {
+      font-size: 1rem;
+    }
+
+    .card-content {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input, .form-group select, .form-group button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .form-group button {
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-group button:hover {
+      background-color: #004d99;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #005bb5;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <div class="logo">FinPlan</div>
+      <ul class="nav-links">
+        <li><a href="#budget">Budget Calculator</a></li>
+        <li><a href="#scholarships">Scholarships</a></li>
+        <li><a href="#loans">Loan Guidance</a></li>
+        <li><a href="#jobs">Part-Time Jobs</a></li>
+      </ul>
+      
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Smart Financial Planning for Your Future</h1>
+    <p>Use our tools and resources to manage your budget, find scholarships, get loan guidance, and explore part-time job opportunities.</p>
+    <button onclick="window.location.href='#budget'">Get Started</button>
+  </section>
+
+  <!-- Budget Calculator -->
+  <section id="budget" class="card-section">
+    <h2>Budget Calculator</h2>
+    <div class="card budget" onclick="toggleContent('budget-content')">
+      <p>Plan and manage your expenses with ease.</p>
+    </div>
+    <div class="card-content" id="budget-content">
+      <p>Enter your income, fixed expenses, and savings goals to get a detailed breakdown and financial plan.</p>
+      <form class="form-group" id="budget-form">
+        <label for="income">Amount recived or Earned ($)</label>
+        <input type="number" id="income" name="income" required>
+        
+        <label for="expenses">Fixed Expenses ($)</label>
+        <input type="number" id="expenses" name="expenses" required>
+        
+        <label for="savings">Savings Goal ($)</label>
+        <input type="number" id="savings" name="savings" required>
+        
+        <button type="button" onclick="calculateBudget()">Calculate</button>
+      </form>
+      <div id="budget-result"></div>
+    </div>
+  </section>
+
+  <!-- Scholarship Finder -->
+  <section id="scholarships" class="card-section">
+    <h2>Scholarship Finder</h2>
+    <div class="card scholarship" onclick="toggleContent('scholarship-content')">
+      <p>Find scholarships that suit your academic profile.</p>
+    </div>
+    <div class="card-content" id="scholarship-content">
+      <p>Explore scholarships based on your academic achievements and personal background. Don't miss the funding opportunities!</p>
+      <form class="form-group" id="scholarship-form">
+        <label for="gpa">GPA</label>
+        <input type="number" step="0.1" id="gpa" name="gpa" required>
+        
+        <label for="field">Field of Study</label>
+        <select id="field" name="field">
+          <option value="engineering">Engineering</option>
+          <option value="science">Science</option>
+          <option value="arts">Arts</option>
+          <option value="business">Business</option>
+        </select>
+        
+        <button type="button" onclick="findScholarships()">Find Scholarships</button>
+      </form>
+      <div id="scholarship-results"></div>
+    </div>
+  </section>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Finder</title>
+    <style>
+      .card-section { margin: 20px; padding: 10px; }
+      .card { background-color: #f0f0f0; cursor: pointer; padding: 10px; margin-bottom: 10px; }
+      .card-content { margin-top: 10px; background-color: #e8f4f8; padding: 15px; border: 1px solid #ccc; display: none; }
+      h3 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+  
+  <!-- Loan Guidance -->
+  <section id="loans" class="card-section">
+    <h2>Loan Finder</h2>
+    <div class="card loan" onclick="toggleContent('loan-content')">
+      <p>Find the best loan options tailored to your needs.</p>
+    </div>
+    <div class="card-content" id="loan-content">
+      <p>Enter your financial details to discover the most suitable loan options.</p>
+      <form class="form-group" id="loan-form">
+        <label for="income">Monthly Income ($)</label>
+        <input type="number" id="income" name="income" required>
+  
+        <label for="loan-type">Loan Type</label>
+        <select id="loan-type" name="loan-type" required>
+          <option value="education">Education Loan</option>
+          <option value="personal">Personal Loan</option>
+          <option value="auto">Auto Loan</option>
+          <option value="home">Home Loan</option>
+        </select>
+  
+        <label for="loan-term">Loan Term (Years)</label>
+        <input type="number" id="loan-term" name="loan-term" required>
+  
+        <button type="button" onclick="findLoans()">Find Loans</button>
+      </form>
+      <div id="loan-results"></div>
+    </div>
+  </section>
+  
+  <script>
+    // Toggle display of the loan content section
+    function toggleContent(id) {
+      const content = document.getElementById(id);
+      // Initialize display properly
+      if (content.style.display === "" || content.style.display === "none") {
+        content.style.display = "block";
+      } else {
+        content.style.display = "none";
+      }
+    }
+  
+    // Function to find loans based on user input
+    function findLoans() {
+      const incomeInput = document.getElementById('income').value;
+      const loanType = document.getElementById('loan-type').value;
+      const loanTermInput = document.getElementById('loan-term').value;
+  
+      // Check for empty fields
+      if (!incomeInput || !loanTermInput) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+  
+      const income = parseFloat(incomeInput);
+      const loanTerm = parseInt(loanTermInput);
+  
+      // Validate input
+      if (isNaN(income) || isNaN(loanTerm)) {
+        alert("Invalid input. Please enter valid numbers.");
+        return;
+      }
+  
+      // Loan database
+      const loans = [
+        { name: "Federal Student Loan", type: "education", minIncome: 1000, term: 10, interest: "5%", link: "https://studentaid.gov/" },
+        { name: "Private Student Loan", type: "education", minIncome: 1500, term: 15, interest: "7%", link: "https://www.privatestudentloans.com/" },
+        { name: "Low-Interest Personal Loan", type: "personal", minIncome: 2000, term: 5, interest: "8%", link: "https://www.lendingclub.com/" },
+        { name: "Unsecured Personal Loan", type: "personal", minIncome: 2500, term: 7, interest: "10%", link: "https://www.sofi.com/" },
+        { name: "Fixed-Rate Home Loan", type: "home", minIncome: 3000, term: 20, interest: "4%", link: "https://www.bankofamerica.com/" },
+        { name: "Adjustable-Rate Home Loan", type: "home", minIncome: 3500, term: 15, interest: "3.5%", link: "https://www.chase.com/" },
+        { name: "Auto Loan", type: "auto", minIncome: 2000, term: 5, interest: "6%", link: "https://www.capitalone.com/" },
+        { name: "Used Car Loan", type: "auto", minIncome: 1800, term: 4, interest: "7%", link: "https://www.autotrader.com/" }
+      ];
+  
+      // Filter loans based on input
+      const filteredLoans = loans.filter(loan =>
+        loan.type === loanType && loan.minIncome <= income && loan.term >= loanTerm
+      ).sort((a, b) => parseFloat(a.interest) - parseFloat(b.interest));
+  
+      // Display top 3 loans
+      const topLoans = filteredLoans.slice(0, 3);
+      const resultsDiv = document.getElementById('loan-results');
+      resultsDiv.innerHTML = "<h3>Top Loan Options:</h3>";
+  
+      if (topLoans.length > 0) {
+        topLoans.forEach(loan => {
+          resultsDiv.innerHTML += `
+            <p>
+              <strong>${loan.name}</strong><br>
+              Minimum Income: $${loan.minIncome}<br>
+              Interest Rate: ${loan.interest}<br>
+              Loan Term: ${loan.term} years<br>
+              <a href="${loan.link}" target="_blank">Learn More</a>
+            </p>`;
+        });
+      } else {
+        resultsDiv.innerHTML += "<p>No loans match your criteria. Try adjusting your inputs.</p>";
+      }
+    }
+  </script>
+  
+  </body>
+  </html>
+  
+</script>
+
+  <!-- Part-Time Job Guide -->
+  <section id="jobs" class="card-section">
+    <h2>Part-Time Job Guide</h2>
+    <div class="card job" onclick="toggleContent('job-content')">
+      <p>Explore part-time jobs near you to support your education.</p>
+    </div>
+    <div class="card-content" id="job-content">
+      <p>Find flexible job opportunities near your campus that fit your schedule. Start earning while you learn!</p>
+      <form class="form-group" id="job-form">
+        <label for="availability">Available Hours/Week</label>
+        <input type="number" id="availability" name="availability" required>
+        
+        <label for="preferred-job">Preferred Job Type</label>
+        <select id="preferred-job" name="preferred-job">
+          <option value="tutor">Tutor</option>
+          <option value="barista">Barista</option>
+          <option value="retail">Retail Assistant</option>
+          <option value="admin">Administrative Work</option>
+        </select>
+        
+        <button type="button" onclick="findJobs()">Find Jobs</button>
+      </form>
+      <div id="job-results"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 FinPlan. All rights reserved.</p>
+  </footer>
+
+  <script src="financial-planning.js"></script>
+  <script>
+    // Example functions for interaction
+    function toggleContent(contentId) {
+      const content = document.getElementById(contentId);
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function calculateBudget() {
+      const income = parseFloat(document.getElementById('income').value);
+      const expenses = parseFloat(document.getElementById('expenses').value);
+      const savings = parseFloat(document.getElementById('savings').value);
+      const result = income - expenses - savings;
+      document.getElementById('budget-result').innerText = `Remaining Budget: $${result.toFixed(2)}`;
+    }
+
+    function findScholarships() {
+  const gpa = parseFloat(document.getElementById('gpa').value);
+  const scholarships = [
+    { name: "Fulbright Scholarship", minGPA: 3.5, link: "https://us.fulbrightonline.org/" },
+    { name: "Chevening Scholarship", minGPA: 3.2, link: "https://www.chevening.org/" },
+    { name: "Rhodes Scholarship", minGPA: 3.8, link: "https://www.rhodeshouse.ox.ac.uk/" },
+    { name: "Erasmus Mundus Scholarship", minGPA: 3.0, link: "https://www.eacea.ec.europa.eu/" },
+    { name: "DAAD Scholarship", minGPA: 3.4, link: "https://www.daad.de/en/" },
+    { name: "Australia Awards Scholarship", minGPA: 3.0, link: "https://www.dfat.gov.au/people-to-people/australia-awards" },
+    { name: "Commonwealth Scholarship", minGPA: 3.3, link: "https://cscuk.fcdo.gov.uk/" },
+    { name: "Knight-Hennessy Scholars", minGPA: 3.7, link: "https://knight-hennessy.stanford.edu/" },
+    { name: "Gates Cambridge Scholarship", minGPA: 3.7, link: "https://www.gatescambridge.org/" },
+    { name: "Think Big Scholarship", minGPA: 3.0, link: "https://www.bristol.ac.uk/international/fees-finance/scholarships/" }
+  ];
+
+  // Filter scholarships based on GPA and sort by closeness to GPA
+  const filteredScholarships = scholarships
+    .filter(scholarship => scholarship.minGPA <= gpa)
+    .sort((a, b) => b.minGPA - a.minGPA);
+
+  // Display the top 3 scholarships
+  const topScholarships = filteredScholarships.slice(0, 3);
+  const resultsDiv = document.getElementById('scholarship-results');
+  resultsDiv.innerHTML = "<h3>Top 3 Scholarships for Your Profile:</h3>";
+  if (topScholarships.length > 0) {
+    topScholarships.forEach(scholarship => {
+      resultsDiv.innerHTML += `
+        <p>
+          <strong>${scholarship.name}</strong><br>
+          Minimum GPA: ${scholarship.minGPA}<br>
+          <a href="${scholarship.link}" target="_blank">Learn More</a>
+        </p>
+      `;
+    });
+  } else {
+    resultsDiv.innerHTML += "<p>No scholarships found for your GPA range.</p>";
+  }
+}
+
+function findLoans() {
+  const gpa = parseFloat(document.getElementById('gpa').value);  // Can be any other input like credit score or income.
+  const loans = [
+    { name: "Student Loan A", minGPA: 3.0, maxGPA: 3.5, link: "https://www.loanA.com" },
+    { name: "Student Loan B", minGPA: 3.5, maxGPA: 4.0, link: "https://www.loanB.com" },
+    { name: "Student Loan C", minGPA: 2.5, maxGPA: 3.0, link: "https://www.loanC.com" },
+    { name: "Student Loan D", minGPA: 3.0, maxGPA: 3.7, link: "https://www.loanD.com" },
+    { name: "Student Loan E", minGPA: 3.2, maxGPA: 3.9, link: "https://www.loanE.com" },
+    { name: "Student Loan F", minGPA: 2.8, maxGPA: 3.2, link: "https://www.loanF.com" }
+  ];
+
+  // Filter loans based on GPA range and sort by closeness to GPA
+  const filteredLoans = loans
+    .filter(loan => loan.minGPA <= gpa && loan.maxGPA >= gpa)
+    .sort((a, b) => b.minGPA - a.minGPA); // You can adjust sorting logic
+
+  // Display the top 3 loans
+  const topLoans = filteredLoans.slice(0, 3);
+  const resultsDiv = document.getElementById('loan-results');
+  resultsDiv.innerHTML = "<h3>Top 3 Loans for Your Profile:</h3>";
+  if (topLoans.length > 0) {
+    topLoans.forEach(loan => {
+      resultsDiv.innerHTML += `
+        <p>
+          <strong>${loan.name}</strong><br>
+          GPA Range: ${loan.minGPA} - ${loan.maxGPA}<br>
+          <a href="${loan.link}" target="_blank">Learn More</a>
+        </p>
+      `;
+    });
+  } else {
+    resultsDiv.innerHTML += "<p>No loans found for your GPA range.</p>";
+  }
+}
+
+
+    function findJobs() {
+      const availability = parseFloat(document.getElementById('availability').value);
+      const jobType = document.getElementById('preferred-job').value;
+      // Simulate fetching job results based on input
+      document.getElementById('job-results').innerText = `Part-time jobs available as a ${jobType} for ${availability} hours/week.`;
+    }
+  </script>
+</body>
+</html>

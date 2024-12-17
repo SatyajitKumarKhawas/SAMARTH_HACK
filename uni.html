@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header p {
+            font-size: 1.1em;
+            margin: 0.5em 0 0;
+        }
+        main {
+            padding: 2em;
+        }
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 1em;
+        }
+        .university-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 1.5em;
+        }
+        .university-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1em;
+            width: calc(33% - 2em);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .university-card h3 {
+            color: #333;
+        }
+        .university-card p {
+            color: #555;
+        }
+        iframe {
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            height: 600px;
+            margin-top: 2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the University Finder</h1>
+        <p>Discover top universities around the world tailored to your preferences.</p>
+    </header>
+
+    <main>
+        <h2>Explore Universities</h2>
+        <div class="university-list">
+            <div class="university-card">
+                <h3>University of California, Berkeley</h3>
+                <p>Known for its excellence in AI and Machine Learning research programs.</p>
+            </div>
+            <div class="university-card">
+                <h3>Georgia Institute of Technology</h3>
+                <p>Affordable and high-quality AI programs renowned worldwide.</p>
+            </div>
+            <div class="university-card">
+                <h3>University of Washington</h3>
+                <p>Specializes in Data Science and cutting-edge AI research.</p>
+            </div>
+        </div>
+
+        <h2>Find Your University</h2>
+        <iframe 
+            src="https://uni-rec-us0f.onrender.com/" 
+            title="University Finder Tool">
+        </iframe>
+    </main>
+
+    <footer>
+        &copy; 2024 University Finder. All Rights Reserved.
+    </footer>
+</body>
+</html>
